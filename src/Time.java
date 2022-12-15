@@ -1,8 +1,3 @@
-/**
-   Represents time in hours and minutes using
-   the customary conventions.
-*/
-
 public class Time
 {
    private int hours;
@@ -11,54 +6,29 @@ public class Time
 
 
 
-   public Time(String militaryTime)
-   {
-      if (militaryTime == null)
+   public Time(String militaryTime) throws InputFormatException {
+      if (militaryTime == "")
       {
-         System.out.println(militaryTime +
-                            " is not a " +
-                            "valid military time." );
+         throw new InputFormatException("You haven't entered any Input");
       }
       else if (militaryTime.length() != 5)
       {
-         System.out.println(militaryTime +
-                            " is not a " +
-                            "valid military time." );
+         throw new InputFormatException("Length of the input you have entered is incorrect");
+      }
+      else  if (militaryTime.charAt(2) != ':')
+      {
+         throw new InputFormatException("Input is in incorrect format");
       }
       else
-      {
-         if (militaryTime.charAt(2) != ':')
          {
-            System.out.println(militaryTime +
-                               " is not a " +
-                               "valid military time." );
-         }
-         else if (!Character.isDigit(militaryTime.charAt(0)))
-         {
-            System.out.println(militaryTime +
-                               " is not a " +
-                               "valid military time." );
-         }
-         else if (!Character.isDigit(militaryTime.charAt(1)))
-         {
-            System.out.println(militaryTime +
-                               " is not a " +
-                               "valid military time." );
-         }
-         else if (!Character.isDigit(militaryTime.charAt(3)))
-         {
-            System.out.println(militaryTime +
-                               " is not a " +
-                               "valid military time." );
-         }
-         else if (!Character.isDigit(militaryTime.charAt(4)))
-         {
-            System.out.println(militaryTime +
-                               " is not a " +
-                               "valid military time." );
-         }
-         else
-         {
+            for (int n = 0; n < militaryTime.length(); n++){
+               if (n == 2) continue;
+               else if (!Character.isDigit(militaryTime.charAt(n))) {
+                  throw new InputFormatException("Input contains non-digit character(s)");
+               }
+            }
+
+
             hours = Integer.parseInt(String.valueOf(militaryTime.split(":")[0]));
             minutes = Integer.parseInt(String.valueOf(militaryTime.split(":")[1]));
 
@@ -96,7 +66,6 @@ public class Time
             }
          }
       }
-   }
 
    /**
       The toString method returns a conventional time.

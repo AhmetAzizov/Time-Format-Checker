@@ -18,12 +18,25 @@ public class Main
       {
          System.out.print("\nPlease enter a military time using the ##:## format: ");
          enteredTime = keyboard.nextLine();
-         Time now = new Time (enteredTime);
-         System.out.println("\nWould you like to enter another number (Press Y)? ");
 
-         response = keyboard.nextLine();
+         try {
+            Time now = new Time(enteredTime);
+         }catch(InputFormatException e){
+            System.out.println(e.getMessage());
+         }
 
-         answer = response.charAt(0);
+         // While loop continues until there is no exception to throw.
+         while (true) {
+            try {
+               System.out.println("\nWould you like to enter another number (Press Y)? ");
+               response = keyboard.nextLine();
+               if (response == "") throw new InputFormatException("Input is null");
+               answer = response.charAt(0);
+               break;
+            } catch (InputFormatException e) {
+               System.out.println(e.getMessage());
+            }
+         }
       }
    }
 }
