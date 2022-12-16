@@ -34,54 +34,43 @@ public class Time
 
             if(hours > 23)
             {
-               System.out.println(militaryTime +
-                                  " is not a " +
-                                  "valid military time." );
+               throw new InputFormatException("Hour entered is greater than 23");
             }
             else if(minutes > 59)
             {
-               System.out.println(militaryTime +
-                                  " is not a " +
-                                  "valid military time." );
+               throw new InputFormatException("Minute entered is greater than 59");
             }
-            else if (hours > 12)
-            {
-               hours = hours - 12;
-               afternoon = true;
-               System.out.println(this.toString());
-            }
-            else if (hours == 0)
-            {
-               hours = 12;
-               System.out.println(this.toString());
-            }
-            else if (hours == 12)
-            {
-               afternoon = true;
-               System.out.println(this.toString());
-            }
-            else
-            {
-               System.out.println(this.toString());
+            else {
+               if (hours > 12) {
+                  hours = hours - 12;
+                  afternoon = true;
+               } else if (hours == 0) {
+                  hours = 12;
+               } else if (hours == 12) {
+                  afternoon = true;
+               }
+
+//               System.out.println(this.toString());
             }
          }
       }
 
-   /**
-      The toString method returns a conventional time.
-      @return A conventional time with am or pm.
-   */
+
    public String toString()
    {
       String am_pm;
       String zero = "";
 
-      if (afternoon)
+      if (afternoon){
          am_pm = "PM";
-      else
+      }
+      else {
          am_pm = "AM";
-      if (minutes < 10)
+      }
+
+      if (minutes < 10) {
          zero = "0";
+      }
 
       return hours + ":" + zero + minutes + " " + am_pm;
    }
