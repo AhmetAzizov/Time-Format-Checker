@@ -1,70 +1,51 @@
-public class Time
-{
+public class Time {
    private int hours;
    private int minutes;
    private boolean afternoon;
 
-
-
    public Time(String militaryTime) throws InputFormatException {
-      if (militaryTime == "")
-      {
+      if (militaryTime == "") {
          throw new InputFormatException("You haven't entered any Input");
-      }
-      else if (militaryTime.length() != 5)
-      {
+      } else if (militaryTime.length() != 5) {
          throw new InputFormatException("Length of the input you have entered is incorrect");
-      }
-      else  if (militaryTime.charAt(2) != ':')
-      {
+      } else if (militaryTime.charAt(2) != ':') {
          throw new InputFormatException("Input is in incorrect format");
-      }
-      else
-         {
-            for (int n = 0; n < militaryTime.length(); n++){
-               if (n == 2) continue;
-               else if (!Character.isDigit(militaryTime.charAt(n))) {
-                  throw new InputFormatException("Input contains non-digit character(s)");
-               }
+      } else {
+         for (int n = 0; n < militaryTime.length(); n++) {
+            if (n == 2)
+               continue;
+            else if (!Character.isDigit(militaryTime.charAt(n))) {
+               throw new InputFormatException("Input contains non-digit character(s)");
             }
-
-
+         }
             hours = Integer.parseInt(String.valueOf(militaryTime.split(":")[0]));
             minutes = Integer.parseInt(String.valueOf(militaryTime.split(":")[1]));
 
-            if(hours > 23)
-            {
-               throw new InputFormatException("Hour entered is greater than 23");
-            }
-            else if(minutes > 59)
-            {
-               throw new InputFormatException("Minute entered is greater than 59");
-            }
-            else {
-               if (hours > 12) {
-                  hours = hours - 12;
-                  afternoon = true;
-               } else if (hours == 0) {
-                  hours = 12;
-               } else if (hours == 12) {
-                  afternoon = true;
-               }
-
-//               System.out.println(this.toString());
+         if (hours > 23) {
+            throw new InputFormatException("Hour entered is greater than 23");
+         } else if (minutes > 59) {
+            throw new InputFormatException("Minute entered is greater than 59");
+         } else {
+            if (hours > 12) {
+               hours = hours - 12;
+               afternoon = true;
+            } else if (hours == 0) {
+               hours = 12;
+            } else if (hours == 12) {
+               afternoon = true;
             }
          }
       }
+   }
 
 
-   public String toString()
-   {
+   public String toString() {
       String am_pm;
       String zero = "";
 
-      if (afternoon){
+      if (afternoon) {
          am_pm = "PM";
-      }
-      else {
+      } else {
          am_pm = "AM";
       }
 
@@ -72,6 +53,6 @@ public class Time
          zero = "0";
       }
 
-      return hours + ":" + zero + minutes + " " + am_pm;
+      return "Regular Time: " + hours + ":" + zero + minutes + " " + am_pm;
    }
 }
