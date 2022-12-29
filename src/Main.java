@@ -1,12 +1,15 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.print.PrinterException;
 import java.util.Scanner;
-public class Main
-{
-   public static void main(String[] args)
-   {
+
+public class Main {
+   public static void main(String[] args) throws PrinterException {
       Scanner keyboard = new Scanner(System.in);
       char answer = 'Y';
       String enteredTime;
       String response;
+
 
       while (Character.toUpperCase(answer) == 'Y') {
          System.out.print("\nPlease enter a military time using the ##:## format: ");

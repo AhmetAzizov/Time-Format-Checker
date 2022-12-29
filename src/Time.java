@@ -3,6 +3,8 @@ public class Time {
    private int minutes;
    private boolean afternoon;
 
+   public Time(){}
+
    public Time(String militaryTime) throws InputFormatException {
       if (militaryTime == "") {
          throw new InputFormatException("You haven't entered any Input");
@@ -18,8 +20,8 @@ public class Time {
                throw new InputFormatException("Input contains non-digit character(s)");
             }
          }
-            hours = Integer.parseInt(String.valueOf(militaryTime.split(":")[0]));
-            minutes = Integer.parseInt(String.valueOf(militaryTime.split(":")[1]));
+         hours = Integer.parseInt(String.valueOf(militaryTime.split(":")[0]));
+         minutes = Integer.parseInt(String.valueOf(militaryTime.split(":")[1]));
 
          if (hours > 23) {
             throw new InputFormatException("Hour entered is greater than 23");
@@ -38,21 +40,33 @@ public class Time {
       }
    }
 
+   public int getHours() {
+      return hours;
+   }
 
+   public int getMinutes() {
+      return minutes;
+   }
+
+   public boolean isAfternoon() {
+      return afternoon;
+   }
+
+   @Override
    public String toString() {
       String am_pm;
       String zero = "";
 
-      if (afternoon) {
+      if (isAfternoon()) {
          am_pm = "PM";
       } else {
          am_pm = "AM";
       }
 
-      if (minutes < 10) {
+      if (getMinutes() < 10) {
          zero = "0";
       }
 
-      return "Regular Time: " + hours + ":" + zero + minutes + " " + am_pm;
+      return "Regular Time: " + getHours() + ":" + zero + getMinutes() + " " + am_pm;
    }
 }
